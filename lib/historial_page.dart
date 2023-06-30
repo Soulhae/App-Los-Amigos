@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:mysql1/mysql1.dart';
+// import 'package:mysql1/mysql1.dart';
 import 'db_connection.dart';
+import 'package:intl/intl.dart';
 
 class HistorialPage extends StatefulWidget {
-  const HistorialPage({super.key});
+  final int idUsuario;
+
+  const HistorialPage({super.key, required this.idUsuario});
 
   @override
   _HistorialPageState createState() => _HistorialPageState();
 }
 
 class _HistorialPageState extends State<HistorialPage> {
-  List<Map<String, dynamic>> purchaseHistory = [];
+  List<Map<String, dynamic>> productosUsuario = [];
+  List<Map<String, dynamic>> producto = [];
   bool isDataVisible = false;
 
   @override
@@ -24,11 +28,36 @@ class _HistorialPageState extends State<HistorialPage> {
           Container(
             alignment: Alignment.center,
             child: ElevatedButton(
-            onPressed: () {
-              toggleDataVisibility();
-              fetchPurchaseHistory();
-            },
-            child: Text(isDataVisible ? 'Ocultar Historial de Compras' : 'Mostrar Historial de Compras'),
+              onPressed: () async {
+                toggleDataVisibility();
+                await fetchPurchaseHistory();
+                if (isDataVisible &&
+                    productosUsuario.isEmpty &&
+                    context.mounted) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('No posee productos'),
+                        content:
+                            const Text('El historial de compras está vacío.'),
+                        actions: <Widget>[
+                          TextButton(
+                            child: const Text('Aceptar'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              toggleDataVisibility();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+              },
+              child: Text(isDataVisible
+                  ? 'Ocultar Historial de Compras'
+                  : 'Mostrar Historial de Compras'),
             ),
           ),
           const SizedBox(height: 20.0),
@@ -36,20 +65,24 @@ class _HistorialPageState extends State<HistorialPage> {
             visible: isDataVisible,
             child: Expanded(
               child: ListView.builder(
-                itemCount: purchaseHistory.length,
+                itemCount: productosUsuario.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text('${purchaseHistory[index]['nombre']}'),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('ID: ${purchaseHistory[index]['id']}\n'),
-                        Text('Descripción: ${purchaseHistory[index]['descripcion']}\n'),
-                        Text('Precio: \$${purchaseHistory[index]['precio']}\n'),
-                        Text('Usuario asociado: ${purchaseHistory[index]['id_usuario']}\n')
-                      ]
-                    ) 
-                  );
+                      title: Text('${producto[index]['nombre']}\n'),
+                      subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('ID Producto: ${producto[index]['id']}\n'),
+                            Text(
+                                'Descripción: ${producto[index]['descripcion']}\n'),
+                            Text(
+                                'Precio unitario: \$${producto[index]['precio']}\n'),
+                            Text(
+                                'Cantidad: ${productosUsuario[index]['cantidad']}\n'),
+                            Text(
+                                'Precio total: \$${producto[index]['total']}\n'),
+                            Text('Fecha de compra: ${DateFormat(productosUsuario[index]['fecha'].toString()).format(DateTime.now()).substring(0,19)}\n'),
+                          ]));
                 },
               ),
             ),
@@ -62,8 +95,32 @@ class _HistorialPageState extends State<HistorialPage> {
   Future<void> fetchPurchaseHistory() async {
     final conn = await getConnection();
 
-    Results result = await conn.query('SELECT * FROM producto');
-    purchaseHistory = result.map((r) => r.fields).toList();
+    var result = await conn.query(
+        'SELECT idProducto, cantidad, fecha FROM listaproductousuario WHERE idUsuario = ?',
+        [widget.idUsuario]);
+    // print(result);
+    productosUsuario = result.map((r) => r.fields).toList();
+    // print(productosUsuario.length);
+    dynamic result2;
+
+    for (var i = 0; i < productosUsuario.length; i++) {
+      result2 = await conn.query(
+          'SELECT nombre, id, descripcion, precio FROM producto WHERE id = ?',
+          [productosUsuario[i]['idProducto']]);
+      if (result2.isNotEmpty) {
+        var productoInfo = result2.first;
+        var total = productoInfo['precio'] * productosUsuario[i]['cantidad'];
+        // print(total);
+
+        producto.add({
+          'nombre': productoInfo['nombre'],
+          'id': productoInfo['id'],
+          'descripcion': productoInfo['descripcion'],
+          'precio': productoInfo['precio'],
+          'total': total,
+        });
+      }
+    }
 
     setState(() {});
 

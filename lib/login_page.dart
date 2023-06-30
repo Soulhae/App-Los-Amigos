@@ -57,7 +57,8 @@ class _LoginPageState extends State<LoginPage> {
                     // Navegar a la página de registro al hacer clic en el botón
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const RegisterPage()),
+                      MaterialPageRoute(
+                          builder: (context) => const RegisterPage()),
                     );
                   },
                   child: const Text('Crear una cuenta'),
@@ -78,48 +79,52 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future<void> fetchUsuarios() async {
-    final conn = await getConnection();
+  // Future<void> fetchUsuarios() async {
+  //   final conn = await getConnection();
 
-    Results result = await conn.query('SELECT * FROM usuario');
-    usuarios = result.map((r) => r.fields).toList();
+  //   Results result = await conn.query('SELECT * FROM usuario');
+  //   usuarios = result.map((r) => r.fields).toList();
 
-    setState(() {});
+  //   setState(() {});
 
-    await conn.close();
-  }
+  //   await conn.close();
+  // }
 
-  Future<bool> verificarCuenta(nombreUsuario, contrasena) async {
+  Future<Results> verificarCuenta(nombreUsuario, contrasena) async {
     final conn = await getConnection();
 
     Results result = await conn.query(
         'SELECT id FROM usuario WHERE nombre = ? AND password = ? ',
         [nombreUsuario, contrasena]);
 
-    setState(() {});
+     setState(() {});
 
     await conn.close();
-    return result.isNotEmpty;
+    return result;
   }
 
   Future<void> loginUsuario(BuildContext context) async {
     String nombreUsuario = userController.text;
     String contrasena = passwordController.text;
-    bool usuarioExiste = await verificarCuenta(nombreUsuario, contrasena);
+    Results usuario = await verificarCuenta(nombreUsuario, contrasena);
 
-    if (usuarioExiste) {
-      print('existe');
+    if (usuario.isNotEmpty) {
+      int idUsuario = usuario.first['id'];
+      // print('existe');
+      // print('${usuario.first['id']}');
       setState(() {
         errorMessage = '';
       });
-      if(context.mounted) {
+      if (context.mounted) {
         Navigator.of(context).push(
-        MaterialPageRoute(
-            builder: (context) => BienvenidoPage(nombreUsuario: nombreUsuario)),
-      );
+          MaterialPageRoute(
+              builder: (context) => BienvenidoPage(
+                  idUsuario: idUsuario, nombreUsuario: nombreUsuario)),
+        );
       }
     } else {
       if (nombreUsuario.isEmpty || contrasena.isEmpty) {
+        // print('test');
         setState(() {
           errorMessage = 'Por favor, complete todos los campos.';
         });
@@ -130,7 +135,8 @@ class _LoginPageState extends State<LoginPage> {
         });
         return;
       }
-      print('no existe');
+      // print('no existe');
+
       setState(() {
         errorMessage = 'Usuario ingresado no se encuentra registrado.';
         Future.delayed(const Duration(seconds: 5)).then((value) {

@@ -4,8 +4,9 @@ import 'historial_page.dart';
 
 class BienvenidoPage extends StatelessWidget {
   final String nombreUsuario;
+  final int idUsuario;
 
-  const BienvenidoPage({super.key, required this.nombreUsuario});
+  const BienvenidoPage({super.key, required this.idUsuario, required this.nombreUsuario, });
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class BienvenidoPage extends StatelessWidget {
             } else if (value == 'Historial de compras') {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const HistorialPage()),
+                MaterialPageRoute(builder: (context) => HistorialPage(idUsuario: idUsuario)),
               );
             }
           },

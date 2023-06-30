@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'invoices_page.dart';
-import 'historial_page.dart';
+// import 'historial_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -19,22 +19,22 @@ class HomePage extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => const InvoicesPage()),
                 );
-              } else if (value == 'Historial de compras') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HistorialPage()),
-                );
-              }
+              } // else if (value == 'Historial de compras') {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(builder: (context) => const HistorialPage()),
+              //   );
+              // }
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
               const PopupMenuItem<String>(
                 value: 'Ver facturas',
                 child: Text('Ver facturas'),
               ),
-              const PopupMenuItem<String>(
-                value: 'Historial de compras',
-                child: Text('Historial de compras'),
-              ),
+              // const PopupMenuItem<String>(
+              //   value: 'Historial de compras',
+              //   child: Text('Historial de compras'),
+              // ),
             ],
           ),
           IconButton(

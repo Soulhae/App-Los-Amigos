@@ -5,9 +5,9 @@ class InvoicesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Facturas'),
+        title: const Text('Facturas'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Página de Facturas'),
       ),
     );

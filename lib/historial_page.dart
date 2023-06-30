@@ -31,9 +31,7 @@ class _HistorialPageState extends State<HistorialPage> {
               onPressed: () async {
                 toggleDataVisibility();
                 await fetchPurchaseHistory();
-                if (isDataVisible &&
-                    productosUsuario.isEmpty &&
-                    context.mounted) {
+                if (isDataVisible && productosUsuario.isEmpty && mounted) {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -81,7 +79,8 @@ class _HistorialPageState extends State<HistorialPage> {
                                 'Cantidad: ${productosUsuario[index]['cantidad']}\n'),
                             Text(
                                 'Precio total: \$${producto[index]['total']}\n'),
-                            Text('Fecha de compra: ${DateFormat(productosUsuario[index]['fecha'].toString()).format(DateTime.now()).substring(0,19)}\n'),
+                            Text(
+                                'Fecha de compra: ${DateFormat(productosUsuario[index]['fecha'].toString()).format(DateTime.now()).substring(0, 19)}\n'),
                           ]));
                 },
               ),

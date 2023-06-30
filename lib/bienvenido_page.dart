@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'invoices_page.dart';
+import 'facturas_page.dart';
 import 'historial_page.dart';
+import 'ofertas_page.dart';
 
 class BienvenidoPage extends StatelessWidget {
   final String nombreUsuario;
@@ -17,19 +18,27 @@ class BienvenidoPage extends StatelessWidget {
             if (value == 'Ver facturas') {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const InvoicesPage()),
+                MaterialPageRoute(builder: (context) => const FacturasPage()),
               );
             } else if (value == 'Historial de compras') {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => HistorialPage(idUsuario: idUsuario)),
               );
+            } else if (value == 'Ver ofertas'){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const OfertasPage()));
             }
           },
           itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
             const PopupMenuItem<String>(
               value: 'Ver facturas',
               child: Text('Ver facturas'),
+            ),
+            const PopupMenuItem<String>(
+              value: 'Ver ofertas',
+              child: Text('Ver ofertas'),
             ),
             const PopupMenuItem<String>(
               value: 'Historial de compras',

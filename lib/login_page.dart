@@ -61,7 +61,15 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Text('Crear una cuenta'),
                 ),
               ),
-            ])
+            ]),
+            SizedBox(height: 10.0),
+            Text(
+              errorMessage,
+              style: const TextStyle(
+                color: Colors.red,
+                fontSize: 16.0,
+              ),
+            ),
           ],
         ),
       ),
@@ -99,14 +107,35 @@ class _LoginPageState extends State<LoginPage> {
 
     if (usuarioExiste) {
       print('existe');
-      Navigator.of(context).push(
+      setState(() {
+        errorMessage = '';
+      });
+      if(context.mounted) {
+        Navigator.of(context).push(
         MaterialPageRoute(
             builder: (context) => BienvenidoPage(nombreUsuario: nombreUsuario)),
       );
+      }
     } else {
+      if (nombreUsuario.isEmpty || contrasena.isEmpty) {
+        setState(() {
+          errorMessage = 'Por favor, complete todos los campos.';
+        });
+        Future.delayed(const Duration(seconds: 5)).then((value) {
+          setState(() {
+            errorMessage = '';
+          });
+        });
+        return;
+      }
       print('no existe');
       setState(() {
-        errorMessage = 'Usuario no encontrado.';
+        errorMessage = 'Usuario ingresado no se encuentra registrado.';
+        Future.delayed(const Duration(seconds: 5)).then((value) {
+          setState(() {
+            errorMessage = '';
+          });
+        });
       });
     }
   }

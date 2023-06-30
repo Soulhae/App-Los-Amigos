@@ -10,7 +10,7 @@ class BienvenidoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Bienvenido'), actions: <Widget>[
+      appBar: AppBar(title: Text('Bienvenid@!'), actions: <Widget>[
         PopupMenuButton<String>(
           onSelected: (value) {
             if (value == 'Ver facturas') {
@@ -42,7 +42,7 @@ class BienvenidoPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              '¡Bienvenido, $nombreUsuario!',
+              '¡Bienvenid@, $nombreUsuario!',
               style: TextStyle(fontSize: 24),
             ),
             SizedBox(height: 20),

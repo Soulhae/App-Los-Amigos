@@ -5,6 +5,8 @@ import 'register_page.dart';
 import 'bienvenido_page.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -48,21 +50,21 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Text('Iniciar Sesión'),
                 ),
               ),
-              SizedBox(width: 20.0),
+              const SizedBox(width: 20.0),
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
                     // Navegar a la página de registro al hacer clic en el botón
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => RegisterPage()),
+                      MaterialPageRoute(builder: (context) => const RegisterPage()),
                     );
                   },
                   child: const Text('Crear una cuenta'),
                 ),
               ),
             ]),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             Text(
               errorMessage,
               style: const TextStyle(

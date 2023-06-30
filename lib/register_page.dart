@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'db_connection.dart';
 
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
@@ -31,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 labelText: 'Nombre de Usuario',
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             TextField(
               controller: passwordController,
               obscureText: true,
@@ -39,7 +41,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 labelText: 'Contraseña',
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             TextField(
               controller: confirmPasswordController,
               obscureText: true,
@@ -47,12 +49,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 labelText: 'Confirmar Contraseña',
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () => registerUser(context),
               child: const Text('Registrarse'),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             Text(
               errorMessage,
               style: const TextStyle(

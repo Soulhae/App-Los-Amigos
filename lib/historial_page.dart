@@ -3,6 +3,8 @@ import 'package:mysql1/mysql1.dart';
 import 'db_connection.dart';
 
 class HistorialPage extends StatefulWidget {
+  const HistorialPage({super.key});
+
   @override
   _HistorialPageState createState() => _HistorialPageState();
 }

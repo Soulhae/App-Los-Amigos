@@ -4,6 +4,8 @@ import 'invoices_page.dart';
 import 'historial_page.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,12 +17,12 @@ class HomePage extends StatelessWidget {
               if (value == 'Ver facturas') {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => InvoicesPage()),
+                  MaterialPageRoute(builder: (context) => const InvoicesPage()),
                 );
               } else if (value == 'Historial de compras') {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HistorialPage()),
+                  MaterialPageRoute(builder: (context) => const HistorialPage()),
                 );
               }
             },
@@ -40,7 +42,7 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
+                MaterialPageRoute(builder: (context) => const LoginPage()),
               );
             },
           ),

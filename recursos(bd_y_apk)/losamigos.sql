@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: bin07922repd91xmnlyb-mysql.services.clever-cloud.com:3306
--- Generation Time: Jun 30, 2023 at 09:47 PM
+-- Generation Time: Jul 01, 2023 at 12:28 AM
 -- Server version: 8.0.22-13
 -- PHP Version: 7.2.34
 
@@ -42,7 +42,8 @@ CREATE TABLE `listaproductousuario` (
 
 INSERT INTO `listaproductousuario` (`id`, `idUsuario`, `idProducto`, `cantidad`, `fecha`) VALUES
 (1, 2, 6, 7, '2022-05-16 16:44:14'),
-(2, 2, 7, 4, '2023-06-05 22:29:18');
+(2, 2, 7, 4, '2023-06-05 22:29:18'),
+(3, 2, 6, 13, '2023-06-30 18:41:16');
 
 -- --------------------------------------------------------
 
@@ -86,7 +87,6 @@ INSERT INTO `usuario` (`id`, `nombre`, `password`) VALUES
 (2, 'user', 'password'),
 (3, 'vacio', 'password'),
 (4, 'lanatt', 'lanajeje'),
-(5, 'test', 'test'),
 (6, 'testnavigator', '12345'),
 (7, 'prueba', 'asd'),
 (8, 'testclever', 'testing');
@@ -123,7 +123,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `listaproductousuario`
 --
 ALTER TABLE `listaproductousuario`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `producto`
@@ -135,7 +135,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

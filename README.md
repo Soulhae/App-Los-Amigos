@@ -12,7 +12,7 @@ Vicente Salinas, Eyleen Sánchez, Benjamín Herrera
 
 ### Ejecución del código
 
-* Si desea ejecutar el código requiere de instalar Flutter y todas sus dependencias, por razones de comodidad añadimos el apk al repositorio.
+* Si desea ejecutar el código requiere de instalar Flutter y todas sus dependencias, por razones de comodidad añadimos el apk al repositorio (`recursos(bd_y_apk)/app-release.apk`).
 * La base de datos se encuentra en un hosting gratuito de clever-cloud, añadimos también una copia de esta.
 * En caso de que no funcione la conexión a la base de datos, importar localmente en XAMPP el archivo `recursos(bd_y_apk)/losamigos.sql` y modificar las variables de configuración en `lib/db_connection.dart`. OJO, en host no debe ir localhost, si no `10.0.2.2`
 

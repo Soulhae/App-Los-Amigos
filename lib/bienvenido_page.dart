@@ -15,17 +15,17 @@ class BienvenidoPage extends StatelessWidget {
       appBar: AppBar(title: const Text('Bienvenid@!'), actions: <Widget>[
         PopupMenuButton<String>(
           onSelected: (value) {
-            if (value == 'Ver facturas') {
+            if (value == 'Boletas y/o facturas') {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const FacturasPage()),
+                MaterialPageRoute(builder: (context) => FacturasPage(idUsuario: idUsuario)),
               );
             } else if (value == 'Historial de compras') {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => HistorialPage(idUsuario: idUsuario)),
               );
-            } else if (value == 'Ver ofertas'){
+            } else if (value == 'Ofertas activas'){
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const OfertasPage()));
@@ -33,12 +33,12 @@ class BienvenidoPage extends StatelessWidget {
           },
           itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
             const PopupMenuItem<String>(
-              value: 'Ver facturas',
-              child: Text('Ver facturas'),
+              value: 'Boletas y/o facturas',
+              child: Text('Boletas y/o facturas'),
             ),
             const PopupMenuItem<String>(
-              value: 'Ver ofertas',
-              child: Text('Ver ofertas'),
+              value: 'Ofertas activas',
+              child: Text('Ofertas activas'),
             ),
             const PopupMenuItem<String>(
               value: 'Historial de compras',
@@ -56,10 +56,10 @@ class BienvenidoPage extends StatelessWidget {
               style: const TextStyle(fontSize: 24),
             ),
             const SizedBox(height: 20),
-            Image.network(
-              'https://media.discordapp.net/attachments/821058935325851678/1098066060818788422/Sin_titulo.gif',
-              height: 200,
-              width: 200,
+            Image.asset(
+              'assets/image.png',
+              height: 300,
+              width: 300,
             ),
           ],
         ),

@@ -16,6 +16,8 @@ class _HistorialPageState extends State<HistorialPage> {
   List<Map<String, dynamic>> productosUsuario = [];
   List<Map<String, dynamic>> producto = [];
   bool isDataVisible = false;
+  // int currentPage = 1;
+  // int itemsPerPage = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class _HistorialPageState extends State<HistorialPage> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text('No posee productos'),
+                        title: const Text('No registra compras'),
                         content:
                             const Text('El historial de compras está vacío.'),
                         actions: <Widget>[
@@ -86,6 +88,37 @@ class _HistorialPageState extends State<HistorialPage> {
               ),
             ),
           ),
+          // Visibility(
+          //   visible: isDataVisible,
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: [
+          //       ElevatedButton(
+          //         onPressed: () {
+          //           if (currentPage > 1) {
+          //             setState(() {
+          //               currentPage--;
+          //               print(currentPage);
+          //               fetchPurchaseHistory();
+          //             });
+          //           }
+          //         },
+          //         child: Text('Página Anterior'),
+          //       ),
+          //       const SizedBox(width: 10.0),
+          //       ElevatedButton(
+          //         onPressed: () {
+          //           setState(() {
+          //             currentPage++;
+          //             print(currentPage);
+          //             fetchPurchaseHistory();
+          //           });
+          //         },
+          //         child: Text('Página Siguiente'),
+          //       ),
+          //     ],
+          //   ),
+          // )
         ],
       ),
     );
@@ -95,6 +128,8 @@ class _HistorialPageState extends State<HistorialPage> {
     final conn = await getConnection();
 
     var result = await conn.query(
+        // 'SELECT idProducto, cantidad, fecha FROM listaproductousuario WHERE idUsuario = ? LIMIT ? OFFSET ?',
+        // [widget.idUsuario, itemsPerPage, (currentPage - 1) * itemsPerPage]);
         'SELECT idProducto, cantidad, fecha FROM listaproductousuario WHERE idUsuario = ?',
         [widget.idUsuario]);
     // print(result);
@@ -104,7 +139,7 @@ class _HistorialPageState extends State<HistorialPage> {
 
     for (var i = 0; i < productosUsuario.length; i++) {
       result2 = await conn.query(
-          'SELECT nombre, id, descripcion, precio FROM producto WHERE id = ?',
+          'SELECT nombre, id, descripcion, precio FROM productoOld WHERE id = ?',
           [productosUsuario[i]['idProducto']]);
       if (result2.isNotEmpty) {
         var productoInfo = result2.first;

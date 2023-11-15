@@ -48,8 +48,15 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: const Center(
-        child: Text('Contenido de la página de inicio'),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // const Text('Contenido de la página de inicio'),
+            // const SizedBox(height: 20),
+            Image.asset('assets/image.png'),
+          ],
+        ),
       ),
     );
   }

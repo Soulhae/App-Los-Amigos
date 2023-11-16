@@ -7,6 +7,7 @@ class FacturasPage extends StatefulWidget {
   final int idUsuario;
 
   const FacturasPage({super.key, required this.idUsuario});
+  static const route = '/facturas-page';
 
   @override
   _FacturasPageState createState() => _FacturasPageState();

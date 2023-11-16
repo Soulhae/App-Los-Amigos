@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "892217618341",
+    "project_id": "losamigos-1f1db",
+    "storage_bucket": "losamigos-1f1db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:892217618341:android:f53ae3ec7bfb3f9a3fc24c",
+        "android_client_info": {
+          "package_name": "com.example.soy_ese"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2iuPGW4RjfUlOIUtusq6IlgxUhjBS9PY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

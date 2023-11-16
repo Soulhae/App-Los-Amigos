@@ -8,6 +8,7 @@ class BienvenidoPage extends StatelessWidget {
   final int idUsuario;
 
   const BienvenidoPage({super.key, required this.idUsuario, required this.nombreUsuario, });
+  static const route = '/bienvenido-page';
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class BienvenidoPage extends StatelessWidget {
             } else if (value == 'Ofertas activas'){
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const OfertasPage()));
+                MaterialPageRoute(builder: (context) => OfertasPage(idUsuario: idUsuario)));
             }
           },
           itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[

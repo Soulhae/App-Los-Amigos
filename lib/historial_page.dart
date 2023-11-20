@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'historial_detail_page.dart';
 // import 'package:mysql1/mysql1.dart';
 import 'db_connection.dart';
 import 'package:intl/intl.dart';
@@ -65,14 +66,21 @@ class _HistorialPageState extends State<HistorialPage> {
             visible: isDataVisible,
             child: Expanded(
               child: ListView.builder(
+                padding: EdgeInsets.all(10),
                 itemCount: productosUsuario.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
+                  return Container(
+                  margin: EdgeInsets.all(10),
+                  decoration:  BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.blue[300],
+                  ),
+                  child: ListTile(
                       title: Text('${producto[index]['nombre']}\n'),
                       subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('ID Producto: ${producto[index]['id']}\n'),
+                            /*Text('ID Producto: ${producto[index]['id']}\n'),
                             Text(
                                 'Descripción: ${producto[index]['descripcion']}\n'),
                             Text(
@@ -80,10 +88,25 @@ class _HistorialPageState extends State<HistorialPage> {
                             Text(
                                 'Cantidad: ${productosUsuario[index]['cantidad']}\n'),
                             Text(
-                                'Precio total: \$${producto[index]['total']}\n'),
+                                'Precio total: \$${producto[index]['total']}\n'),*/
                             Text(
                                 'Fecha de compra: ${DateFormat(productosUsuario[index]['fecha'].toString()).format(DateTime.now()).substring(0, 19)}\n'),
-                          ]));
+                          ]),
+                      trailing: Icon(Icons.arrow_forward_ios_rounded),
+                      onTap: (){
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HistorialDetailPage(
+                          nombre: '${producto[index]['nombre']}',
+                          id: '${producto[index]['id']}',
+                          descripcion: '${producto[index]['descripcion']}',
+                          precio: '${producto[index]['precio']}',
+                          cantidad: '${productosUsuario[index]['cantidad']}',
+                          total: '${producto[index]['total']}',
+                          fecha: '${DateFormat(productosUsuario[index]['fecha'].toString()).format(DateTime.now()).substring(0, 19)}',)),
+                      );
+                      },
+                        ));
                 },
               ),
             ),

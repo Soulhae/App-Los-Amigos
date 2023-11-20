@@ -1,6 +1,6 @@
 # App-Los-Amigos
 
-Vicente Salinas, Eyleen Sánchez, Benjamín Herrera
+Vicente Salinas, Eyleen Sánchez, Benjamín Herrera, Nicolás Acuña
 
 ## Detalles de desarrollo
 
@@ -32,3 +32,4 @@ Vicente Salinas, Eyleen Sánchez, Benjamín Herrera
 [AndroidStudioWeb]:https://developer.android.com/studio
 [MySQL]:https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white
 [MySQLWeb]:https://www.mysql.com
+

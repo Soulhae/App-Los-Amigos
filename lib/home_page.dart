@@ -3,61 +3,84 @@ import 'login_page.dart';
 // import 'facturas_page.dart';
 // import 'historial_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatelessWidget{
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Página de Inicio'),
-        actions: <Widget>[
-          // PopupMenuButton<String>(
-          //   onSelected: (value) {
-          //     // if (value == 'Ver facturas') {
-          //     //   Navigator.push(
-          //     //     context,
-          //     //     MaterialPageRoute(builder: (context) => const FacturasPage()),
-          //     //   );
-          //     // } // else if (value == 'Historial de compras') {
-          //     //   Navigator.push(
-          //     //     context,
-          //     //     MaterialPageRoute(builder: (context) => const HistorialPage()),
-          //     //   );
-          //     // }
-          //   },
-          //   itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-          //     const PopupMenuItem<String>(
-          //       value: 'Ver facturas',
-          //       child: Text('Ver facturas'),
-          //     ),
-          //     // const PopupMenuItem<String>(
-          //     //   value: 'Historial de compras',
-          //     //   child: Text('Historial de compras'),
-          //     // ),
-          //   ],
-          // ),
-          IconButton(
-            icon: const Icon(Icons.login),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginPage()),
-              );
-            },
-          ),
-        ],
-      ),
-      body: Center(
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            colors: [
+              Colors.blue.shade900,
+              Colors.blue.shade800,
+              Colors.blue.shade400
+            ]
+          )
+        ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // const Text('Contenido de la página de inicio'),
-            // const SizedBox(height: 20),
-            Image.asset('assets/image.png'),
+            Expanded(
+              child: Container(
+                width: MediaQuery.of(context).size.width*0.9,
+                margin: EdgeInsets.all(30),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16)
+                ),
+                child: Padding(
+                    padding: EdgeInsets.all(30),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "Los Amigos APP",
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                          ),),
+                        Image.asset(
+                          "assets/amigos.png",
+                          width: MediaQuery.of(context).size.width*0.5,
+                          color: Colors.blue,
+                          ),
+                        MaterialButton(
+                          onPressed: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const LoginPage()),
+                            );
+                          },
+                          height: 60,
+                          minWidth: MediaQuery.of(context).size.width*0.6,
+                          color: Colors.green,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50),
+
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Comenzar",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15
+                                ),
+                                ),
+                          ),
+                          )
+                      ],
+                     ),
+                  ),
+              ),)
           ],
         ),
-      ),
+        ),
     );
   }
 }

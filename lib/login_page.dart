@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:mysql1/mysql1.dart';
-import 'package:soy_ese/api/firebase_api.dart';
-import 'db_connection.dart';
-import 'register_page.dart';
 import 'bienvenido_page.dart';
+import 'home_page.dart';
+import 'db_connection.dart';
+//import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -20,8 +21,128 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+     return Scaffold(
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            colors: [
+              Colors.blue.shade900,
+              Colors.blue.shade800,
+              Colors.blue.shade400
+            ]
+          )
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 15,),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  FadeInLeft(
+                    duration: Duration(milliseconds: 2000),
+                    child: IconButton(
+                      onPressed: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const HomePage()),
+                        );
+                      },
+                      icon: const Icon(Icons.arrow_back),
+                      color: Colors.white,
+                      )
+                    ),
+                  SizedBox(height: 20,),
+                  FadeInUp(duration: Duration(milliseconds: 1000), child: Text("Inicio de sesión", style: TextStyle(color: Colors.white, fontSize: 40),)),
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(60), topRight: Radius.circular(60))
+                ),
+                child: Padding(
+                    padding: EdgeInsets.all(30),
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(height: 60,),
+                        FadeInUp(duration: Duration(milliseconds: 1400), child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [BoxShadow(
+                              color: Color.fromRGBO(9, 13, 228, 0.29),
+                              blurRadius: 20,
+                              offset: Offset(0, 10)
+                            )]
+                          ),
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  border: Border(bottom: BorderSide(color: Colors.grey.shade200))
+                                ),
+                                child: TextField(
+                                  controller: userController,
+                                  decoration: InputDecoration(
+                                    hintText: "Usuario",
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                    border: InputBorder.none
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  border: Border(bottom: BorderSide(color: Colors.grey.shade200))
+                                ),
+                                child: TextField(
+                                  obscureText: true,
+                                  controller: passwordController,
+                                  decoration: InputDecoration(
+                                    hintText: "Contraseña",
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                    border: InputBorder.none
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )),
+                        SizedBox(height: 40,),
+                        FadeInUp(duration: Duration(milliseconds: 1500), child: Text("¿Olvidaste tu contraseña?", style: TextStyle(color: Colors.grey),)),
+                        SizedBox(height: 40,),
+                        FadeInUp(duration: Duration(milliseconds: 1600), child: MaterialButton(
+                          onPressed: () => loginUsuario(context),
+                          height: 50,
+                          color: Colors.blue[900],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50),
+
+                          ),
+                          child: Center(
+                            child: Text("Continuar", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                          ),
+                        )),
+                      ],
+                    ),
+                  ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+
+      /*appBar: AppBar(
         title: const Text('Inicio de Sesión'),
       ),
       body: Padding(
@@ -76,8 +197,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ],
         ),
-      ),
-    );
+      ),*/
   }
 
   // Future<void> fetchUsuarios() async {
@@ -117,11 +237,6 @@ class _LoginPageState extends State<LoginPage> {
         errorMessage = '';
       });
       if (context.mounted) {
-        FirebaseApi().sendNotification(
-          idUsuario: idUsuario,
-          nombreUsuario: nombreUsuario,
-          context: context,  
-        );
         Navigator.of(context).push(
           MaterialPageRoute(
               builder: (context) => BienvenidoPage(

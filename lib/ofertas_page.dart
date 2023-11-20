@@ -37,7 +37,13 @@ class _OfertasPageState extends State<OfertasPage> {
               child: ListView.builder(
                 itemCount: ofertasUsuario.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
+                  return Container(
+                    margin: EdgeInsets.all(10),
+                    decoration:  BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.blue[300],
+                    ),
+                    child: ListTile(
                       title: Text('Oferta!! ${oferta[index]['nombre']} ${ofertasUsuario[index]['cantidadProd']} unidades con un ${ofertasUsuario[index]['porcDescuento']}% de descuento\n'),
                       subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +55,7 @@ class _OfertasPageState extends State<OfertasPage> {
                                 'Precio normal: \$${oferta[index]['total']}    '),
                             Text(
                                 'Precio con descuento: \$${oferta[index]['totalDesc']}\n'),
-                          ]));
+                          ])));
                 },
               ),
             ),

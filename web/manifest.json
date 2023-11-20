@@ -1,6 +1,6 @@
 {
-    "name": "soy_ese",
-    "short_name": "soy_ese",
+    "name": "los_amigos_app",
+    "short_name": "los_amigos_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

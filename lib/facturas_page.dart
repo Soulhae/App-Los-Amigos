@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'facturas_detail_page.dart';
 
 import 'db_connection.dart';
 import 'package:intl/intl.dart';
@@ -7,7 +8,8 @@ class FacturasPage extends StatefulWidget {
   final int idUsuario;
 
   const FacturasPage({super.key, required this.idUsuario});
-  static const route = '/facturas-page';
+   static const route = '/facturas-page';
+
 
   @override
   _FacturasPageState createState() => _FacturasPageState();
@@ -65,25 +67,48 @@ class _FacturasPageState extends State<FacturasPage> {
             visible: isDataVisible,
             child: Expanded(
               child: ListView.builder(
+                padding: EdgeInsets.all(10),
                 itemCount: facturasUsuario.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
+                  return Container(
+                    margin: EdgeInsets.all(10),
+                    decoration:  BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.blue[300],
+                    ),
+                    child: ListTile(
                       title: Text('Factura ${facturasUsuario[index]['id']}\n'),
                       subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             // Text('Fecha: ${DateFormat(facturasUsuario[index]['fecha'].toString()).format(DateTime.now()).substring(0, 10)}\n'),
-                            Text(
+                            /*Text(
                                 'Producto: ${producto[index]['nombre']}\n'),
                             Text(
                                 'Precio unitario: \$${producto[index]['precio']}\n'),
                             Text(
                                 'Cantidad: ${venta[index]['cantidad']}\n'),
                             Text(
-                                'Precio total: \$${producto[index]['total']}\n'),
+                                'Precio total: \$${producto[index]['total']}\n'),*/
                             Text(
                                 'Fecha de vencimiento: ${DateFormat(facturasUsuario[index]['fechaVencimiento'].toString()).format(DateTime.now()).substring(0, 10)}\n'),
-                          ]));
+                          ]),
+                        trailing: Icon(Icons.arrow_forward_ios_rounded),
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => FacturasDetailPage(
+                              id: '${facturasUsuario[index]['id']}',
+                              fecha: '${DateFormat(facturasUsuario[index]['fecha'].toString()).format(DateTime.now()).substring(0, 10)}',
+                              nombreProducto: '${producto[index]['nombre']}',
+                              precio: '${producto[index]['precio']}',
+                              cantidad: '${venta[index]['cantidad']}',
+                              total: '${producto[index]['total']}',
+                              fechaVencimiento: '${DateFormat(facturasUsuario[index]['fechaVencimiento'].toString()).format(DateTime.now()).substring(0, 10)}',
+                              )),
+                          );
+                        },
+                          )); 
                 },
               ),
             ),

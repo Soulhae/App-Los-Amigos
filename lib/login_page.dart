@@ -4,6 +4,7 @@ import 'package:mysql1/mysql1.dart';
 import 'bienvenido_page.dart';
 import 'home_page.dart';
 import 'db_connection.dart';
+import 'api/firebase_api.dart';
 //import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -237,6 +238,11 @@ class _LoginPageState extends State<LoginPage> {
         errorMessage = '';
       });
       if (context.mounted) {
+        FirebaseApi().sendNotification(
+          idUsuario: idUsuario,
+          nombreUsuario: nombreUsuario,
+          context: context,
+        );
         Navigator.of(context).push(
           MaterialPageRoute(
               builder: (context) => BienvenidoPage(
